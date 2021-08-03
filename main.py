@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -26,12 +26,13 @@ def get_members():
 @app.route('/members/set', methods=['POST'])
 def set_members():
     values = Values.query.first()
-    values.members = request.form['members']
+    values.members = request.form['count']
     try:
         db.session.commit()
-        return "Изменение прошло успешно"
+        return "success"
     except:
-        return "Ошибка рекдактирования"
+        return "error"
+
 
 @app.route('/projects/get')
 def get_projects():
@@ -42,12 +43,12 @@ def get_projects():
 @app.route('/projects/set', methods=['POST'])
 def set_projects():
     values = Values.query.first()
-    values.projects = request.form['projects']
+    values.projects = request.form['count']
     try:
         db.session.commit()
-        return "Изменение прошло успешно"
+        return "success"
     except:
-        return "Ошибка рекдактирования"
+        return "error"
 
 
 @app.route('/events/get')
@@ -59,12 +60,12 @@ def get_events():
 @app.route('/events/set', methods=['POST'])
 def set_events():
     values = Values.query.first()
-    values.events = request.form['events']
+    values.events = request.form['count']
     try:
         db.session.commit()
-        return "Изменение прошло успешно"
+        return "success"
     except:
-        return "Ошибка рекдактирования"
+        return "error"
 
 
 if __name__ == "__main__":
