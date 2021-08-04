@@ -58,39 +58,44 @@ def set_member():
         return 'error'
 
 
-@app.route('/members/<int:id>', methods=['GET', 'POST'])
-def get_update_delete_member(id):
+@app.route('/members/<int:id>', methods=['GET'])
+def get_member(id):
     values = Members.query.get_or_404(id)
-    if request.method == 'GET':
-        return jsonify({
+    return jsonify({
         'name': values.name,
         'surname': values.surname,
         'contact': values.contact,
         'experience': values.experience,
         'description': values.description
     })
-    else:
-        newvalues = request.json
-        if newvalues is not None:
-            values.name = newvalues['name']
-            values.surname = newvalues['surname']
-            values.contact = newvalues['contact']
-            values.experience = newvalues['experience']
-            values.description = newvalues['description']
-            try:
-                db.session.commit()
-                return 'success'
-            except:
-                return 'error'
-        else:
-            try:
-                db.session.delete(values)
-                db.session.commit()
-                return 'success'
-            except:
-                return 'error'
-    
 
+
+@app.route('/members/<int:id>', methods=['PUT'])
+def update_member(id):
+    values = Members.query.get_or_404(id)
+    newvalues = request.json
+    values.name = newvalues['name']
+    values.surname = newvalues['surname']
+    values.contact = newvalues['contact']
+    values.experience = newvalues['experience']
+    values.description = newvalues['description']
+    try:
+        db.session.commit()
+        return 'success'
+    except:
+        return 'error'
+
+
+@app.route('/members/<int:id>', methods=['DELETE'])
+def delete_member(id):
+    values = Members.query.get_or_404(id)
+    try:
+        db.session.delete(values)
+        db.session.commit()
+        return 'success'
+    except:
+        return 'error'
+    
 
 @app.route('/members/count')
 def get_members():
@@ -108,12 +113,10 @@ def set_project():
     db.session.commit()
     return 'success'
 
-
-@app.route('/projects/<int:id>', methods=['GET', 'POST'])
-def get_update_delete_project(id):
+@app.route('/projects/<int:id>', methods=['GET'])
+def get_project(id):
     values = Projects.query.get_or_404(id)
-    if request.method == 'GET':
-        return jsonify({
+    return jsonify({
         'name': values.name,
         'status': values.status,
         'description': values.description,
@@ -121,27 +124,34 @@ def get_update_delete_project(id):
         'date_end': values.date_end,
         'link': values.link
     })
-    else:
-        newvalues = request.json
-        if newvalues is not None:
-            values.name = newvalues['name']
-            values.status = newvalues['status']
-            values.description = newvalues['description']
-            values.date_start = newvalues['date_start']
-            values.date_end = newvalues['date_end']
-            values.link = newvalues['link']
-            try:
-                db.session.commit()
-                return 'success'
-            except:
-                return 'error'
-        else:
-            try:
-                db.session.delete(values)
-                db.session.commit()
-                return 'success'
-            except:
-                return 'error'
+
+
+@app.route('/projects/<int:id>', methods=['PUT'])
+def update_project(id):
+    values = Projects.query.get_or_404(id)
+    newvalues = request.json
+    values.name = newvalues['name']
+    values.status = newvalues['status']
+    values.description = newvalues['description']
+    values.date_start = newvalues['date_start']
+    values.date_end = newvalues['date_end']
+    values.link = newvalues['link']
+    try:
+        db.session.commit()
+        return 'success'
+    except:
+        return 'error'
+
+
+@app.route('/projects/<int:id>', methods=['DELETE'])
+def delete_project(id):
+    values = Projects.query.get_or_404(id)
+    try:
+        db.session.delete(values)
+        db.session.commit()
+        return 'success'
+    except:
+        return 'error'
 
 
 @app.route('/projects/count')
@@ -161,37 +171,43 @@ def set_event():
     return 'success'
 
 
-@app.route('/events/<int:id>', methods=['GET', 'POST'])
-def get_update_delete_event(id):
+@app.route('/events/<int:id>', methods=['GET'])
+def get_event(id):
     values = Events.query.get_or_404(id)
-    if request.method == 'GET':
-        return jsonify({
+    return jsonify({
         'name': values.name,
         'description': values.description,
         'date_start': values.date_start,
         'date_end': values.date_end,
         'link': values.link
     })
-    else:
-        newvalues = request.json
-        if newvalues is not None:
-            values.name = newvalues['name']
-            values.description = newvalues['description']
-            values.date_start = newvalues['date_start']
-            values.date_end = newvalues['date_end']
-            values.link = newvalues['link']
-            try:
-                db.session.commit()
-                return 'success'
-            except:
-                return 'error'
-        else:
-            try:
-                db.session.delete(values)
-                db.session.commit()
-                return 'success'
-            except:
-                return 'error'
+
+
+@app.route('/events/<int:id>', methods=['PUT'])
+def update_event(id):
+    values = Events.query.get_or_404(id)
+    newvalues = request.json
+    values.name = newvalues['name']
+    values.description = newvalues['description']
+    values.date_start = newvalues['date_start']
+    values.date_end = newvalues['date_end']
+    values.link = newvalues['link']
+    try:
+        db.session.commit()
+        return 'success'
+    except:
+        return 'error'
+
+
+@app.route('/events/<int:id>', methods=['DELETE'])
+def delete_event(id):
+    values = Events.query.get_or_404(id)
+    try:
+        db.session.delete(values)
+        db.session.commit()
+        return 'success'
+    except:
+        return 'error'
 
 
 @app.route('/events/count')
