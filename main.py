@@ -7,7 +7,7 @@ import json
 from sqlalchemy.sql.operators import nullsfirst_op
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://itmo:itmo@localhost/itmo'
+app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://lgxoqrdycawgrn:e89f49a9932f02c9b9b4d032d90f61054c79231b9597cd9beaa57170b64a64b4@ec2-54-74-60-70.eu-west-1.compute.amazonaws.com/d7brmitp7gpbml'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
